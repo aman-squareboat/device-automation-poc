@@ -3,24 +3,21 @@ from fastapi import FastAPI
 import paho.mqtt.client as mqtt
 import time
 client = mqtt.Client()
-client.connect("mosquitto.squareboat.info")
 app = FastAPI()
 def on_connect(*args):
     print(args)
-def on_publish(client,userdata,result): 
+def on_publish(*args): 
     print("PUBLISHED MESSAGE")
+    print(args)
 client.on_publish = on_publish
 client.on_connect = on_connect
 client.publish("test","OFF")
 
 @app.get("/house/light/toggle")
 def toggle_light():
-    sent,message_num = client.publish(topic="house/light",payload="TOGGLE")
-    print(sent,message_num)
 
-    if(sent != 0):
-        client.connect("mosquitto.squareboat.info")
-        client.publish(topic="house/light",payload="TOGGLE")
+    client.connect("mosquitto.squareboat.info")
+    client.publish(topic="house/light",payload="TOGGLE")
    
     # time.sleep(4)
     
