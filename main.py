@@ -15,7 +15,9 @@ client.publish("test","OFF")
 
 @app.get("/house/light/toggle")
 def toggle_light():
-    sent,_ = client.publish(topic="house/light",payload="TOGGLE")
+    sent,message_num = client.publish(topic="house/light",payload="TOGGLE")
+    print(sent,message_num)
+
     if(sent != 0):
         client.connect("mosquitto.squareboat.info")
         client.publish(topic="house/light",payload="TOGGLE")
