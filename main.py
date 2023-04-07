@@ -2,7 +2,7 @@ from typing import Union
 from fastapi import FastAPI
 import paho.mqtt.client as mqtt
 import time
-client = mqtt.Client("httpserver")
+client = mqtt.Client()
 client.connect("mosquitto.squareboat.info")
 app = FastAPI()
 def on_connect(*args):
