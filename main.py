@@ -22,3 +22,31 @@ def toggle_light():
     # time.sleep(4)
     
     return "Toggling light"
+
+@app.get("/house/fan/toggle")
+def toggle_fan():
+
+    client.connect("mosquitto.squareboat.info")
+    client.publish(topic="house/fan",payload="TOGGLE")
+   
+    # time.sleep(4)
+    
+    return "Toggling fan"
+@app.get("/house/socket/toggle")
+def toggle_socket():
+
+    client.connect("mosquitto.squareboat.info")
+    client.publish(topic="house/socket",payload="TOGGLE")
+   
+    # time.sleep(4)
+    
+    return "Toggling socket"
+@app.get("/house/ac/toggle")
+def toggle_ac():
+
+    client.connect("mosquitto.squareboat.info")
+    client.publish(topic="house/ac",payload="TOGGLE")
+   
+    # time.sleep(4)
+    
+    return "Toggling ac"
