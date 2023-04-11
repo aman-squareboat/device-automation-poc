@@ -1,9 +1,17 @@
 from typing import Union
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 import paho.mqtt.client as mqtt
 import time
 client = mqtt.Client()
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 def on_connect(*args):
     print(args)
 def on_publish(*args): 
